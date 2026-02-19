@@ -19,6 +19,6 @@ pub var audio_streams: []?*c.SDL_AudioStream = audio_streams_buf[0..0];
 pub var window_width: i32 = 1280;
 pub var window_height: i32 = 720;
 
-pub var images: ArrayList(Image) = undefined;
+pub var images: ArrayList(Image) = std.ArrayListUnmanaged(Image){};
 
 pub const Image = struct { texture: *c.SDL_Texture, rect: c.SDL_FRect = undefined, width: i32, height: i32, scale: f32 = 1, pos_x: f32, pos_y: f32, z_index: usize = 0, selected: bool };

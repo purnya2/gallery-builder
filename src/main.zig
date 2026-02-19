@@ -36,14 +36,15 @@ fn sdlAppInit(appstate: ?*?*anyopaque, argv: [][*:0]u8) !c.SDL_AppResult {
 }
 
 fn debug_loadimages() !void {
+    const allocator = std.heap.page_allocator;
+
     const lajade = @embedFile("assets/testjade.jpg");
     const empanada = @embedFile("assets/empanada.jpg");
 
-    const allocator = std.heap.smp_allocator;
     var image = try zigimg.Image.fromMemory(allocator, lajade[0..]);
     var image2 = try zigimg.Image.fromMemory(allocator, empanada[0..]);
-
     defer image.deinit(allocator);
+    defer image2.deinit(allocator);
 
     const sdl_format = try getSDLPixelFormat(image.pixels);
     const sdl_format2 = try getSDLPixelFormat(image2.pixels);
